@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import styles from './styles/UploadMicroservice.module.css';
-import InputWithLabel from './common/InputWithLabel';
-import { fetchWithHandler } from '../utils/fetchWithHandler';
-import { uploadImage } from '../apis/template';
+import styles from '../styles/UploadMicroservice.module.css';
+import InputWithLabel from '../common/InputWithLabel';
+import { fetchWithHandler } from '../../utils/fetchWithHandler';
+import { uploadImage } from '../../apis/template';
 
 export default function UploadMicroservice() {
   const [gitUrl, setGitUrl] = useState('');
@@ -51,6 +51,7 @@ export default function UploadMicroservice() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.title}>마이크로서비스 등록</div>
       <InputWithLabel
         name="Git 주소"
         value={gitUrl}

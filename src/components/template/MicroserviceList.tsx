@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { fetchWithHandler } from '../utils/fetchWithHandler';
-import { getImageList } from '../apis/template';
-import styles from './styles/MicroserviceList.module.css';
+import { fetchWithHandler } from '../../utils/fetchWithHandler';
+import { getImageList } from '../../apis/template';
+import styles from '../styles/MicroserviceList.module.css';
+import Microservice from './Microservice';
 
 export default function MicroserviceList() {
   const [images, setImages] = useState<string[]>([]);
@@ -28,7 +29,7 @@ export default function MicroserviceList() {
             key={imageName}
             className={styles.image}
           >
-            {imageName}
+            <Microservice imageName={imageName} />
           </li>
         ))}
       </ul>

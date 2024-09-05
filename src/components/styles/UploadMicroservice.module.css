@@ -5,6 +5,12 @@
   padding: 1rem;
 }
 
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
 .specTitle {
   font-weight: 700;
 }

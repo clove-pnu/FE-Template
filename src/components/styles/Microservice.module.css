@@ -1,0 +1,17 @@
+.specContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.spec {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+
+.specValue::before,
+.specValue::after {
+  content: '"';
+}

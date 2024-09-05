@@ -1,5 +1,5 @@
-import MicroserviceList from './components/MicroserviceList';
-import UploadMicroservice from './components/UploadMicroservice';
+import MicroserviceList from './components/template/MicroserviceList';
+import UploadMicroservice from './components/template/UploadMicroservice';
 
 export default function App() {
   return (

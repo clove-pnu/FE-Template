@@ -1,4 +1,4 @@
-import { UploadImage } from '../utils/type';
+import { GetSpec, UploadImage } from '../utils/type';
 import { templateInstance } from './instance';
 
 export async function getImageList() {
@@ -11,4 +11,8 @@ export async function uploadImage({ gitUrl, imageName, spec }: UploadImage) {
     image_name: imageName,
     spec,
   });
+}
+
+export async function getSpec({ repoName, imageName }: GetSpec) {
+  return templateInstance.get(`./spec/${repoName}/${imageName}`);
 }

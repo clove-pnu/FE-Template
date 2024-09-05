@@ -7,3 +7,8 @@ export interface UploadImage {
   imageName: string;
   spec: ImageSpec;
 }
+
+export interface GetSpec {
+  repoName: string;
+  imageName: string;
+}
