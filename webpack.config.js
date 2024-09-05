@@ -58,5 +58,11 @@ module.exports = {
     compress: false,
     port: 3005,
     historyApiFallback: true,
+    proxy: [
+      {
+        context: ['/pool'],
+        target: 'http://34.47.117.26',
+      },
+    ],
   },
 };

@@ -1,5 +1,11 @@
+import MicroserviceList from './components/MicroserviceList';
+import UploadMicroservice from './components/UploadMicroservice';
+
 export default function App() {
   return (
-    <div>Hello, World!</div>
+    <main>
+      <MicroserviceList />
+      <UploadMicroservice />
+    </main>
   );
 }

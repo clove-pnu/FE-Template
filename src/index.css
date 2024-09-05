@@ -15,7 +15,7 @@
   src: url('./fonts/NotoSansKR-VariableFont_wght.ttf') format('truetype');
 }
 
-* {
+body, * {
   font-family: 'NotoSansKR', sans-serif;
 }
 
