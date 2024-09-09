@@ -3,8 +3,19 @@ import { fetchWithHandler } from '../../utils/fetchWithHandler';
 import { getImageList } from '../../apis/template';
 import styles from '../styles/MicroserviceList.module.css';
 import Microservice from './Microservice';
+import Title from '../common/Title';
 
-export default function MicroserviceList() {
+interface MicroserviceListProps {
+  setImageList: React.Dispatch<React.SetStateAction<string[]>>;
+  setPortVals: React.Dispatch<React.SetStateAction<[number, string][][]>>;
+  setEnvVals: React.Dispatch<React.SetStateAction<[string, string][][]>>;
+}
+
+export default function MicroserviceList({
+  setImageList,
+  setPortVals,
+  setEnvVals,
+}:MicroserviceListProps) {
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
@@ -22,14 +33,24 @@ export default function MicroserviceList() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>마이크로서비스 이미지 목록</div>
+      <Title>마이크로서비스 이미지 목록</Title>
       <ul>
-        {images && images.map((imageName) => (
+        {images.map((imageName) => (
           <li
             key={imageName}
             className={styles.image}
           >
             <Microservice imageName={imageName} />
+            <button
+              type="button"
+              onClick={() => {
+                setImageList((prev) => [...new Set([...prev, imageName])]);
+                setPortVals((prev) => [...prev, []]);
+                setEnvVals((prev) => [...prev, []]);
+              }}
+            >
+              템플릿에 추가
+            </button>
           </li>
         ))}
       </ul>

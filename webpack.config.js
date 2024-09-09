@@ -63,6 +63,10 @@ module.exports = {
         context: ['/pool'],
         target: 'http://34.47.117.26',
       },
+      {
+        context: ['/template'],
+        target: 'http://34.47.117.26',
+      },
     ],
   },
 };

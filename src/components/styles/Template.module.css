@@ -1,0 +1,17 @@
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.detail {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+
+.detailValue::before,
+.detailValue::after {
+  content: '"';
+}

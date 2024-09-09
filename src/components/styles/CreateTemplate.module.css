@@ -3,37 +3,44 @@
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
+  align-items: start;
 }
 
-.specTitle {
+.title {
+  margin-top: 1rem;
   font-weight: 700;
 }
 
-.specInputContainer {
+.image {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid black;
+}
+
+.imageTitle {
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  align-items: center;
+  font-weight: 700;
 }
 
-.specList {
+.portValList,
+.envValList {
   display: flex;
   flex-direction: column;
+  padding: 1rem 0;
   gap: 0.5rem;
-  padding: 0.5rem;
 }
 
-.spec {
+.portVal,
+.envVal {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
   align-items: center;
 }
 
-.specValue::before,
-.specValue::after {
-  content: '"';
-}
-
-.uploadButton {
-  align-self: start;
+.envFormContainer {
+  padding: 0.5rem 0;
 }

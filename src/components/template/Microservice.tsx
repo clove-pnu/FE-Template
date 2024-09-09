@@ -50,7 +50,6 @@ export default function Microservice({
       </button>
       {isSpecShown
       && (
-
       <ul className={styles.specContainer}>
         {spec.map(([key, value]) => (
           <li
