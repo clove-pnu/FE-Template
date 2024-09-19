@@ -13,7 +13,7 @@ export default function App() {
   const [pathPrefix, setPathPrefix] = useState<string[]>([]);
 
   return (
-    <main>
+    <main style={{ minWidth: '1024px' }}>
       <MicroserviceList
         setImageList={setImageList}
         setPortVals={setPortVals}
