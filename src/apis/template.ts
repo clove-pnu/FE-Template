@@ -7,7 +7,7 @@ interface CreateTemplateParams {
   pathPrefix: string[];
   portVals: [number, string][][];
   envVals: [string, string][][];
-  volVals: [string, string, string][];
+  volVals: [string, string, string][][];
   volMntVals: [string, string][][];
 }
 

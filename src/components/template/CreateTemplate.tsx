@@ -12,8 +12,8 @@ interface CreateTemplateProps {
   setPortVals: React.Dispatch<React.SetStateAction<[number, string][][]>>;
   envVals: [string, string][][];
   setEnvVals: React.Dispatch<React.SetStateAction<[string, string][][]>>;
-  volumeVals: [string, string, string][];
-  setVolumeVals: React.Dispatch<React.SetStateAction<[string, string, string][]>>;
+  volumeVals: [string, string, string][][];
+  setVolumeVals: React.Dispatch<React.SetStateAction<[string, string, string][][]>>;
   volumeMountVals: [string, string][][];
   setVolumeMountVals: React.Dispatch<React.SetStateAction<[string, string][][]>>;
   pathPrefix: string[];
@@ -26,6 +26,8 @@ interface ENVFormProps {
   setPortVals: React.Dispatch<React.SetStateAction<[number, string][][]>>;
   envVals: [string, string][][];
   setEnvVals: React.Dispatch<React.SetStateAction<[string, string][][]>>;
+  volumeVals: [string, string, string][][];
+  setVolumeVals: React.Dispatch<React.SetStateAction<[string, string, string][][]>>;
   volumeMountVals: [string, string][][];
   setVolumeMountVals: React.Dispatch<React.SetStateAction<[string, string][][]>>;
 }
@@ -36,6 +38,8 @@ function ENVForm({
   setPortVals,
   envVals,
   setEnvVals,
+  volumeVals,
+  setVolumeVals,
   volumeMountVals,
   setVolumeMountVals,
 }: ENVFormProps) {
@@ -43,6 +47,9 @@ function ENVForm({
   const [protocol, setProtocol] = useState('');
   const [evKey, setEvKey] = useState('');
   const [evVal, setEvVal] = useState('');
+  const [volValName, setVolValName] = useState('');
+  const [volVal, setVolVal] = useState('');
+  const [volValType, setVolValType] = useState('');
   const [volMntValName, setVolMntValName] = useState('');
   const [volMntVal, setVolMntVal] = useState('');
 
@@ -65,6 +72,20 @@ function ENVForm({
       ]);
       setEvKey('');
       setEvVal('');
+    }
+  };
+
+  const handleAddVolVal = () => {
+    if (volValName !== '' && volVal !== '' && volValType !== '') {
+      setVolumeVals((prev) => [
+        ...prev.slice(0, index),
+        [...prev[index], [volValName, volVal, volValType]],
+        ...prev.slice(index + 1),
+      ]);
+
+      setVolValName('');
+      setVolVal('');
+      setVolValType('');
     }
   };
 
@@ -93,6 +114,14 @@ function ENVForm({
     setEnvVals((prev) => [
       ...prev.slice(0, index),
       [...prev[index].slice(0, envIndex), ...prev[index].slice(envIndex + 1)],
+      ...prev.slice(index + 1),
+    ]);
+  };
+
+  const handleDeleteVolVal = (volValIndex: number) => {
+    setVolumeVals((prev) => [
+      ...prev.slice(0, index),
+      [...prev[index].slice(0, volValIndex), ...prev[index].slice(volValIndex + 1)],
       ...prev.slice(index + 1),
     ]);
   };
@@ -172,6 +201,43 @@ function ENVForm({
         ))}
       </ul>
       <InputWithLabel
+        name="Volume name"
+        value={volValName}
+        setValue={setVolValName}
+      />
+      <InputWithLabel
+        name="Volume value"
+        value={volVal}
+        setValue={setVolVal}
+      />
+      <InputWithLabel
+        name="Volume type"
+        value={volValType}
+        setValue={setVolValType}
+      />
+      <button
+        type="button"
+        onClick={handleAddVolVal}
+      >
+        추가
+      </button>
+      <ul className={styles.envValList}>
+        {volumeVals[index].map(([vvn, vv, vvt], volValIndex) => (
+          <li
+            key={`${vvn}-${vv}-${vvt}`}
+            className={styles.envVal}
+          >
+            <div>{`"${vvn}", "${vv}", "${vvt}"`}</div>
+            <button
+              type="button"
+              onClick={() => handleDeleteVolVal(volValIndex)}
+            >
+              제거
+            </button>
+          </li>
+        ))}
+      </ul>
+      <InputWithLabel
         name="Volume mount name"
         value={volMntValName}
         setValue={setVolMntValName}
@@ -222,9 +288,6 @@ export default function CreateTemplate({
   setPathPrefix,
 }: CreateTemplateProps) {
   const [templateName, setTemplateName] = useState('');
-  const [volValName, setVolValName] = useState('');
-  const [volVal, setVolVal] = useState('');
-  const [volValType, setVolValType] = useState('');
 
   const handleCreateTemplate = () => {
     if (templateName !== '' && imageList.length > 0) {
@@ -242,29 +305,15 @@ export default function CreateTemplate({
           setImageList([]);
           setPortVals([]);
           setEnvVals([]);
+          setVolumeVals([]);
+          setVolumeMountVals([]);
+          setPathPrefix([]);
         },
         onError: (error) => {
           console.error(error);
         },
       });
     }
-  };
-
-  const handleAddVolVal = () => {
-    if (volValName !== '' && volVal !== '' && volValType !== '') {
-      setVolumeVals((prev) => [...prev, [volValName, volVal, volValType]]);
-
-      setVolValName('');
-      setVolVal('');
-      setVolValType('');
-    }
-  };
-
-  const handleDeleteVolVal = (volValIndex: number) => {
-    setVolumeVals((prev) => [
-      ...prev.slice(0, volValIndex),
-      ...prev.slice(volValIndex + 1),
-    ]);
   };
 
   return (
@@ -275,44 +324,6 @@ export default function CreateTemplate({
         value={templateName}
         setValue={setTemplateName}
       />
-      <div className={styles.title}>Volume setting</div>
-      <InputWithLabel
-        name="Volume name"
-        value={volValName}
-        setValue={setVolValName}
-      />
-      <InputWithLabel
-        name="Volume value"
-        value={volVal}
-        setValue={setVolVal}
-      />
-      <InputWithLabel
-        name="Volume type"
-        value={volValType}
-        setValue={setVolValType}
-      />
-      <button
-        type="button"
-        onClick={handleAddVolVal}
-      >
-        추가
-      </button>
-      <ul className={styles.envValList}>
-        {volumeVals.map(([vvn, vvv, vvt], volValIndex) => (
-          <li
-            key={`${vvn}-${vvv}-${vvt}`}
-            className={styles.envVal}
-          >
-            <div>{`"${vvn}", "${vvv}", "${vvt}"`}</div>
-            <button
-              type="button"
-              onClick={() => handleDeleteVolVal(volValIndex)}
-            >
-              제거
-            </button>
-          </li>
-        ))}
-      </ul>
       <div className={styles.title}>마이크로서비스 이미지 목록</div>
       <ul>
         {imageList.map((image, index) => (
@@ -355,6 +366,8 @@ export default function CreateTemplate({
               setPortVals={setPortVals}
               envVals={envVals}
               setEnvVals={setEnvVals}
+              volumeVals={volumeVals}
+              setVolumeVals={setVolumeVals}
               volumeMountVals={volumeMountVals}
               setVolumeMountVals={setVolumeMountVals}
             />
