@@ -60,12 +60,15 @@ export default function Template({
       </div>
       {isDetailShown
       && (
-      <div className={styles.detailContainer}>
-        <JsonViewer
-          data={detail}
-          depth={0}
-        />
-      </div>
+        <>
+          <div className={styles.detailTitle}>템플릿 명세</div>
+          <div className={styles.detailContainer}>
+            <JsonViewer
+              data={detail}
+              depth={0}
+            />
+          </div>
+        </>
       )}
     </div>
   );

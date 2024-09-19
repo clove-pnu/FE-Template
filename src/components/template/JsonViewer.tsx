@@ -21,7 +21,7 @@ export default function JsonViewer({ data, depth }: JsonViewerProps) {
             key={key}
             className={styles.tab}
           >
-            <span>
+            <span className={styles.text}>
               {key}
               :
               {' '}
@@ -54,5 +54,5 @@ export default function JsonViewer({ data, depth }: JsonViewerProps) {
     );
   }
 
-  return <span>{data}</span>;
+  return <span className={styles.text}>{data}</span>;
 }

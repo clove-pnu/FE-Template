@@ -1,3 +1,8 @@
+.detailTitle {
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
 .detailContainer {
   padding: 0.5rem;
 }
