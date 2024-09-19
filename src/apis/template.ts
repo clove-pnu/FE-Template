@@ -4,8 +4,11 @@ import { poolInstance, templateInstance } from './instance';
 interface CreateTemplateParams {
   name: string;
   images: string[];
+  pathPrefix: string[];
   portVals: [number, string][][];
   envVals: [string, string][][];
+  volVals: [string, string, string][];
+  volMntVals: [string, string][][];
 }
 
 export async function getImageList() {
@@ -37,14 +40,18 @@ export async function createTemplate({
   images,
   portVals,
   envVals,
+  volVals,
+  volMntVals,
+  pathPrefix,
 }: CreateTemplateParams) {
   return templateInstance.post('/create', {
     name,
     images,
     port_vals: portVals,
-    env_vals: [],
-    volume_mount_vals: [],
-    volume_vals: [],
+    env_vals: envVals,
+    volume_mount_vals: volMntVals,
+    volume_vals: volVals,
+    path_prefix: pathPrefix,
   });
 }
 

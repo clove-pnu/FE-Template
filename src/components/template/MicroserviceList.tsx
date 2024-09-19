@@ -9,19 +9,20 @@ interface MicroserviceListProps {
   setImageList: React.Dispatch<React.SetStateAction<string[]>>;
   setPortVals: React.Dispatch<React.SetStateAction<[number, string][][]>>;
   setEnvVals: React.Dispatch<React.SetStateAction<[string, string][][]>>;
+  setVolMntVals: React.Dispatch<React.SetStateAction<[string, string][][]>>;
 }
 
 export default function MicroserviceList({
   setImageList,
   setPortVals,
   setEnvVals,
+  setVolMntVals,
 }:MicroserviceListProps) {
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
     fetchWithHandler(() => getImageList(), {
       onSuccess: (response) => {
-        console.log(response);
         const result = response.data.flat();
         setImages(result);
       },
@@ -47,6 +48,7 @@ export default function MicroserviceList({
                 setImageList((prev) => [...new Set([...prev, imageName])]);
                 setPortVals((prev) => [...prev, []]);
                 setEnvVals((prev) => [...prev, []]);
+                setVolMntVals((prev) => [...prev, []]);
               }}
             >
               템플릿에 추가

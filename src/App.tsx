@@ -8,6 +8,9 @@ export default function App() {
   const [imageList, setImageList] = useState<string[]>([]);
   const [portVals, setPortVals] = useState<[number, string][][]>([]);
   const [envVals, setEnvVals] = useState<[string, string][][]>([]);
+  const [volumeVals, setVolumeVals] = useState<[string, string, string][]>([]);
+  const [volumeMountVals, setVolumeMountVals] = useState<[string, string][][]>([]);
+  const [pathPrefix, setPathPrefix] = useState<string[]>([]);
 
   return (
     <main>
@@ -15,6 +18,7 @@ export default function App() {
         setImageList={setImageList}
         setPortVals={setPortVals}
         setEnvVals={setEnvVals}
+        setVolMntVals={setVolumeMountVals}
       />
       <UploadMicroservice />
       <TemplateList />
@@ -25,6 +29,12 @@ export default function App() {
         setPortVals={setPortVals}
         envVals={envVals}
         setEnvVals={setEnvVals}
+        volumeVals={volumeVals}
+        setVolumeVals={setVolumeVals}
+        volumeMountVals={volumeMountVals}
+        setVolumeMountVals={setVolumeMountVals}
+        pathPrefix={pathPrefix}
+        setPathPrefix={setPathPrefix}
       />
     </main>
   );
