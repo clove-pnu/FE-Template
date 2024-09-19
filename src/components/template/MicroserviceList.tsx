@@ -9,6 +9,7 @@ interface MicroserviceListProps {
   setImageList: React.Dispatch<React.SetStateAction<string[]>>;
   setPortVals: React.Dispatch<React.SetStateAction<[number, string][][]>>;
   setEnvVals: React.Dispatch<React.SetStateAction<[string, string][][]>>;
+  setVolVals: React.Dispatch<React.SetStateAction<[string, string, string][][]>>;
   setVolMntVals: React.Dispatch<React.SetStateAction<[string, string][][]>>;
 }
 
@@ -16,6 +17,7 @@ export default function MicroserviceList({
   setImageList,
   setPortVals,
   setEnvVals,
+  setVolVals,
   setVolMntVals,
 }:MicroserviceListProps) {
   const [images, setImages] = useState<string[]>([]);
@@ -41,18 +43,14 @@ export default function MicroserviceList({
             key={imageName}
             className={styles.image}
           >
-            <Microservice imageName={imageName} />
-            <button
-              type="button"
-              onClick={() => {
-                setImageList((prev) => [...new Set([...prev, imageName])]);
-                setPortVals((prev) => [...prev, []]);
-                setEnvVals((prev) => [...prev, []]);
-                setVolMntVals((prev) => [...prev, []]);
-              }}
-            >
-              템플릿에 추가
-            </button>
+            <Microservice
+              imageName={imageName}
+              setImageList={setImageList}
+              setPortVals={setPortVals}
+              setEnvVals={setEnvVals}
+              setVolVals={setVolVals}
+              setVolMntVals={setVolMntVals}
+            />
           </li>
         ))}
       </ul>

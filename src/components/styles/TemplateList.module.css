@@ -5,9 +5,8 @@
   padding: 1rem;
 }
 
-.template {
+.templateList {
   display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  padding: 0.25rem 0;
+  flex-direction: column;
+  gap: 0.5rem;
 }
