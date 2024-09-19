@@ -1,24 +1,29 @@
 import { useState } from 'react';
 import { fetchWithHandler } from '../../utils/fetchWithHandler';
-import { getTemplateDetail } from '../../apis/template';
+import { deleteTempalte, getTemplateDetail } from '../../apis/template';
 import styles from '../styles/Template.module.css';
+import JsonViewer from './JsonViewer';
 
 interface TemplateProps {
+  index: number;
   templateName: string;
+  setTemplateList: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export default function Template({ templateName }: TemplateProps) {
+export default function Template({
+  index,
+  templateName,
+  setTemplateList,
+}: TemplateProps) {
   const [isDetailShown, setIsDetailShown] = useState(false);
-  const [detail, setDetail] = useState([]);
+  const [detail, setDetail] = useState(null);
   const [isDetailCalled, setIsDetailCalled] = useState(false);
 
   const handleGetDetail = () => {
     if (!isDetailCalled) {
       fetchWithHandler(() => getTemplateDetail({ item: templateName }), {
         onSuccess: (response) => {
-          console.log(response);
-          // const obj = response.data;
-          // setDetail(Object.keys(obj).map((key) => [key, obj[key]]));
+          setDetail(response.data);
         },
         onError: (error) => {
           console.error(error);
@@ -29,32 +34,38 @@ export default function Template({ templateName }: TemplateProps) {
     setIsDetailCalled(true);
   };
 
+  const handleDeleteTemplate = () => {
+    deleteTempalte({ item: templateName });
+    setTemplateList((prev) => [...prev.slice(0, index), ...prev.slice(index + 1)]);
+  };
+
   return (
     <div>
-      <button
-        type="button"
-        onClick={() => {
-          setIsDetailShown((prev) => !prev);
-          handleGetDetail();
-        }}
-      >
-        {templateName}
-      </button>
+      <div className={styles.buttonContainer}>
+        <button
+          type="button"
+          onClick={() => {
+            setIsDetailShown((prev) => !prev);
+            handleGetDetail();
+          }}
+        >
+          {templateName}
+        </button>
+        <button
+          type="button"
+          onClick={() => handleDeleteTemplate()}
+        >
+          템플릿 삭제
+        </button>
+      </div>
       {isDetailShown
       && (
-      <ul className={styles.detailContainer}>
-        <li>detail</li>
-        {/* {detail.map(([key, value]) => (
-          <li
-            key={key}
-            className={styles.detail}
-          >
-            <div className={styles.detailValue}>{key}</div>
-            :
-            <div className={styles.detailValue}>{value}</div>
-          </li>
-        ))} */}
-      </ul>
+      <div className={styles.detailContainer}>
+        <JsonViewer
+          data={detail}
+          depth={0}
+        />
+      </div>
       )}
     </div>
   );
