@@ -3,16 +3,17 @@ import { fetchWithHandler } from '../../utils/fetchWithHandler';
 import { deleteTempalte, getTemplateDetail } from '../../apis/template';
 import styles from '../styles/Template.module.css';
 import JsonViewer from './JsonViewer';
+import { TemplateInfo } from '../../utils/type';
 
 interface TemplateProps {
   index: number;
-  templateName: string;
-  setTemplateList: React.Dispatch<React.SetStateAction<string[]>>;
+  template: TemplateInfo;
+  setTemplateList: React.Dispatch<React.SetStateAction<TemplateInfo[]>>;
 }
 
 export default function Template({
   index,
-  templateName,
+  template,
   setTemplateList,
 }: TemplateProps) {
   const [isDetailShown, setIsDetailShown] = useState(false);
@@ -21,7 +22,7 @@ export default function Template({
 
   const handleGetDetail = () => {
     if (!isDetailCalled) {
-      fetchWithHandler(() => getTemplateDetail({ item: templateName }), {
+      fetchWithHandler(() => getTemplateDetail({ item: template[0] }), {
         onSuccess: (response) => {
           setDetail(response.data);
         },
@@ -35,7 +36,7 @@ export default function Template({
   };
 
   const handleDeleteTemplate = () => {
-    deleteTempalte({ item: templateName });
+    deleteTempalte({ item: template[0] });
     setTemplateList((prev) => [...prev.slice(0, index), ...prev.slice(index + 1)]);
   };
 
@@ -49,7 +50,7 @@ export default function Template({
             handleGetDetail();
           }}
         >
-          {templateName}
+          {template[0]}
         </button>
         <button
           type="button"
@@ -57,6 +58,12 @@ export default function Template({
         >
           템플릿 삭제
         </button>
+      </div>
+      <div className={styles.templateInfoContainer}>
+        <div className={styles.templateInfoTitle}>템플릿 별명</div>
+        <div>{template[1].nickname}</div>
+        <div className={styles.templateInfoTitle}>템플릿 설명</div>
+        <div>{template[1].descirption}</div>
       </div>
       {isDetailShown
       && (

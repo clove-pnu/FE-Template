@@ -12,3 +12,12 @@
   flex-direction: row;
   gap: 1rem;
 }
+
+.templateInfoContainer {
+  line-height: 1.25rem;
+}
+
+.templateInfoTitle {
+  font-weight: 700;
+  margin: 0.25rem 0;
+}

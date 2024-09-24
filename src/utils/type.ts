@@ -12,3 +12,8 @@ export interface GetSpec {
   repoName: string;
   imageName: string;
 }
+
+export type TemplateInfo = [string, {
+  nickname: string;
+  descirption: string;
+}];

@@ -4,9 +4,10 @@ import styles from '../styles/TemplateList.module.css';
 import { fetchWithHandler } from '../../utils/fetchWithHandler';
 import { getTemplateList } from '../../apis/template';
 import Template from './Template';
+import { TemplateInfo } from '../../utils/type';
 
 export default function TemplateList() {
-  const [templateList, setTemplateList] = useState<string[]>([]);
+  const [templateList, setTemplateList] = useState<TemplateInfo[]>([]);
 
   useEffect(() => {
     fetchWithHandler(() => getTemplateList(), {
@@ -24,10 +25,10 @@ export default function TemplateList() {
       <Title>템플릿 목록</Title>
       <ul className={styles.templateList}>
         {templateList.map((template, index) => (
-          <li key={template}>
+          <li key={template[0]}>
             <Template
               index={index}
-              templateName={template}
+              template={template}
               setTemplateList={setTemplateList}
             />
           </li>
