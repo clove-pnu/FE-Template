@@ -3,6 +3,8 @@ import { poolInstance, templateInstance } from './instance';
 
 interface CreateTemplateParams {
   name: string;
+  nickname: string;
+  description: string;
   images: string[];
   pathPrefix: string[];
   portVals: [number, string][][];
@@ -37,6 +39,8 @@ export async function getTemplateDetail({ item }: { item: string }) {
 
 export async function createTemplate({
   name,
+  nickname,
+  description,
   images,
   portVals,
   envVals,
@@ -46,6 +50,8 @@ export async function createTemplate({
 }: CreateTemplateParams) {
   return templateInstance.post('/create', {
     name,
+    nickname,
+    description,
     images,
     port_vals: portVals,
     env_vals: envVals,

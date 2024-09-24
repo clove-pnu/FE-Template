@@ -64,11 +64,11 @@ module.exports = (_, argv) => {
       proxy: [
         {
           context: ['/pool'],
-          target: 'http://34.47.117.26',
+          target: 'http://cse.ticketclove.com',
         },
         {
           context: ['/template'],
-          target: 'http://34.47.117.26',
+          target: 'http://cse.ticketclove.com',
         },
       ],
     },

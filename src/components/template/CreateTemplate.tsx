@@ -288,11 +288,15 @@ export default function CreateTemplate({
   setPathPrefix,
 }: CreateTemplateProps) {
   const [templateName, setTemplateName] = useState('');
+  const [templateNickname, setTemplateNickname] = useState('');
+  const [description, setDescription] = useState('');
 
   const handleCreateTemplate = () => {
-    if (templateName !== '' && imageList.length > 0) {
+    if (templateName !== '' && templateNickname !== '' && description !== '' && imageList.length > 0) {
       fetchWithHandler(() => createTemplate({
         name: templateName,
+        nickname: templateNickname,
+        description,
         images: imageList,
         portVals,
         envVals,
@@ -323,6 +327,16 @@ export default function CreateTemplate({
         name="템플릿 이름"
         value={templateName}
         setValue={setTemplateName}
+      />
+      <InputWithLabel
+        name="판매자에게 보여줄 템플릿 이름"
+        value={templateNickname}
+        setValue={setTemplateNickname}
+      />
+      <InputWithLabel
+        name="판매자에게 보여줄 템플릿 설명"
+        value={description}
+        setValue={setDescription}
       />
       <div className={styles.title}>마이크로서비스 이미지 목록</div>
       <ul>
