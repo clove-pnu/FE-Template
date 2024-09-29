@@ -290,6 +290,20 @@ export default function CreateTemplate({
   const [templateName, setTemplateName] = useState('');
   const [templateNickname, setTemplateNickname] = useState('');
   const [description, setDescription] = useState('');
+  const [manualImageName, setManualImageName] = useState('');
+
+  const handleAddImage = () => {
+    if (manualImageName !== '') {
+      if (imageList.find((image) => image === manualImageName) === undefined) {
+        setImageList((prev) => [...prev, manualImageName]);
+        setPortVals((prev) => [...prev, []]);
+        setEnvVals((prev) => [...prev, []]);
+        setVolumeVals((prev) => [...prev, []]);
+        setVolumeMountVals((prev) => [...prev, []]);
+      }
+      setManualImageName('');
+    }
+  };
 
   const handleCreateTemplate = () => {
     if (templateName !== '' && templateNickname !== '' && description !== '' && imageList.length > 0) {
@@ -339,6 +353,17 @@ export default function CreateTemplate({
         setValue={setDescription}
       />
       <div className={styles.title}>마이크로서비스 이미지 목록</div>
+      <InputWithLabel
+        name="직접 추가할 이미지 이름"
+        value={manualImageName}
+        setValue={setManualImageName}
+      />
+      <button
+        type="button"
+        onClick={handleAddImage}
+      >
+        이미지 직접 추가하기
+      </button>
       <ul>
         {imageList.map((image, index) => (
           <li

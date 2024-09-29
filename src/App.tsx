@@ -15,6 +15,7 @@ export default function App() {
   return (
     <main style={{ minWidth: '1024px' }}>
       <MicroserviceList
+        imageList={imageList}
         setImageList={setImageList}
         setPortVals={setPortVals}
         setEnvVals={setEnvVals}

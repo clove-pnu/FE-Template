@@ -6,6 +6,7 @@ import Microservice from './Microservice';
 import Title from '../common/Title';
 
 interface MicroserviceListProps {
+  imageList: string[];
   setImageList: React.Dispatch<React.SetStateAction<string[]>>;
   setPortVals: React.Dispatch<React.SetStateAction<[number, string][][]>>;
   setEnvVals: React.Dispatch<React.SetStateAction<[string, string][][]>>;
@@ -14,6 +15,7 @@ interface MicroserviceListProps {
 }
 
 export default function MicroserviceList({
+  imageList,
   setImageList,
   setPortVals,
   setEnvVals,
@@ -45,6 +47,7 @@ export default function MicroserviceList({
           >
             <Microservice
               imageName={imageName}
+              imageList={imageList}
               setImageList={setImageList}
               setPortVals={setPortVals}
               setEnvVals={setEnvVals}

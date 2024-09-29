@@ -5,6 +5,7 @@ import styles from '../styles/Microservice.module.css';
 
 interface MicroserviceProps {
   imageName: string;
+  imageList: string[];
   setImageList: React.Dispatch<React.SetStateAction<string[]>>;
   setPortVals: React.Dispatch<React.SetStateAction<[number, string][][]>>;
   setEnvVals: React.Dispatch<React.SetStateAction<[string, string][][]>>;
@@ -14,6 +15,7 @@ interface MicroserviceProps {
 
 export default function Microservice({
   imageName,
+  imageList,
   setImageList,
   setPortVals,
   setEnvVals,
@@ -62,11 +64,13 @@ export default function Microservice({
         <button
           type="button"
           onClick={() => {
-            setImageList((prev) => [...new Set([...prev, imageName])]);
-            setPortVals((prev) => [...prev, []]);
-            setEnvVals((prev) => [...prev, []]);
-            setVolVals((prev) => [...prev, []]);
-            setVolMntVals((prev) => [...prev, []]);
+            if (imageList.find((image) => image === imageName) === undefined) {
+              setImageList((prev) => [...prev, imageName]);
+              setPortVals((prev) => [...prev, []]);
+              setEnvVals((prev) => [...prev, []]);
+              setVolVals((prev) => [...prev, []]);
+              setVolMntVals((prev) => [...prev, []]);
+            }
           }}
         >
           템플릿에 추가
