@@ -11,8 +11,9 @@
 
 .specInputContainer {
   display: flex;
-  flex-direction: row;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
 }
 
 .specList {

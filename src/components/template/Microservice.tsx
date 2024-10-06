@@ -58,6 +58,7 @@ export default function Microservice({
             setIsSpecShown((prev) => !prev);
             handleGetSpec();
           }}
+          className={styles.microserviceName}
         >
           {imageName}
         </button>
@@ -72,6 +73,7 @@ export default function Microservice({
               setVolMntVals((prev) => [...prev, []]);
             }
           }}
+          className={styles.button}
         >
           템플릿에 추가
         </button>

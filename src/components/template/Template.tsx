@@ -49,6 +49,7 @@ export default function Template({
             setIsDetailShown((prev) => !prev);
             handleGetDetail();
           }}
+          className={styles.templateName}
         >
           {template[0]}
         </button>
@@ -59,23 +60,27 @@ export default function Template({
           템플릿 삭제
         </button>
       </div>
-      <div className={styles.templateInfoContainer}>
-        <div className={styles.templateInfoTitle}>템플릿 별명</div>
-        <div>{template[1].nickname}</div>
-        <div className={styles.templateInfoTitle}>템플릿 설명</div>
-        <div>{template[1].descirption}</div>
-      </div>
       {isDetailShown
       && (
-        <>
-          <div className={styles.detailTitle}>템플릿 명세</div>
-          <div className={styles.detailContainer}>
-            <JsonViewer
-              data={detail}
-              depth={0}
-            />
+        <div className={styles.specContainer}>
+          <div>
+            <div className={styles.templateInfoTitle}>템플릿 별명</div>
+            <div>{template[1].nickname}</div>
           </div>
-        </>
+          <div>
+            <div className={styles.templateInfoTitle}>템플릿 설명</div>
+            <div>{template[1].descirption}</div>
+          </div>
+          <div>
+            <div className={styles.detailTitle}>템플릿 명세</div>
+            <div className={styles.detailContainer}>
+              <JsonViewer
+                data={detail}
+                depth={0}
+              />
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
