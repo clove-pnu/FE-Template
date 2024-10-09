@@ -72,6 +72,10 @@ export default function Template({
             <div>{template[1].descirption}</div>
           </div>
           <div>
+            <div className={styles.templateInfoTitle}>템플릿 타입</div>
+            {template[1].type.map((t) => <div key={t}>{t}</div>)}
+          </div>
+          <div>
             <div className={styles.detailTitle}>템플릿 명세</div>
             <div className={styles.detailContainer}>
               <JsonViewer

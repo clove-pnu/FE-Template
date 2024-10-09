@@ -55,11 +55,13 @@ export default function UploadMicroservice() {
       <Title>마이크로서비스 등록</Title>
       <InputWithLabel
         name="Git 주소"
+        id="Git 주소"
         value={gitUrl}
         setValue={setGitUrl}
       />
       <InputWithLabel
         name="이미지 이름"
+        id="이미지 이름"
         value={imageName}
         setValue={setImageName}
       />
@@ -67,11 +69,13 @@ export default function UploadMicroservice() {
       <div className={styles.specInputContainer}>
         <InputWithLabel
           name="명세 키"
+          id="명세 키"
           value={specKey}
           setValue={setSpecKey}
         />
         <InputWithLabel
           name="명세 값"
+          id="명세 값"
           value={specValue}
           setValue={setSpecValue}
         />

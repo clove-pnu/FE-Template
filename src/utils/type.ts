@@ -16,4 +16,5 @@ export interface GetSpec {
 export type TemplateInfo = [string, {
   nickname: string;
   descirption: string;
+  type: string[];
 }];

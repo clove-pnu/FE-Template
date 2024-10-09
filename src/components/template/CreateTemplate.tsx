@@ -138,11 +138,13 @@ function ENVForm({
     <div className={styles.envFormContainer}>
       <InputWithLabel
         name="포트"
+        id={`포트-${index}`}
         value={port}
         setValue={setPort}
       />
       <InputWithLabel
         name="프로토콜"
+        id={`프로토콜-${index}`}
         value={protocol}
         setValue={setProtocol}
       />
@@ -170,11 +172,13 @@ function ENVForm({
       </ul>
       <InputWithLabel
         name="환경 변수 키"
+        id={`환경 변수 키-${index}`}
         value={evKey}
         setValue={setEvKey}
       />
       <InputWithLabel
         name="환경 변수 값"
+        id={`환경 변수 값-${index}`}
         value={evVal}
         setValue={setEvVal}
       />
@@ -202,16 +206,19 @@ function ENVForm({
       </ul>
       <InputWithLabel
         name="Volume name"
+        id={`Volme name-${index}`}
         value={volValName}
         setValue={setVolValName}
       />
       <InputWithLabel
         name="Volume value"
+        id={`Volme value-${index}`}
         value={volVal}
         setValue={setVolVal}
       />
       <InputWithLabel
         name="Volume type"
+        id={`Volme type-${index}`}
         value={volValType}
         setValue={setVolValType}
       />
@@ -239,11 +246,13 @@ function ENVForm({
       </ul>
       <InputWithLabel
         name="Volume mount name"
+        id={`Volme mount name-${index}`}
         value={volMntValName}
         setValue={setVolMntValName}
       />
       <InputWithLabel
         name="Volume mount value"
+        id={`Volme mount value-${index}`}
         value={volMntVal}
         setValue={setVolMntVal}
       />
@@ -290,6 +299,7 @@ export default function CreateTemplate({
   const [templateName, setTemplateName] = useState('');
   const [templateNickname, setTemplateNickname] = useState('');
   const [description, setDescription] = useState('');
+  const [templateType, setTemplateType] = useState('');
   const [manualImageName, setManualImageName] = useState('');
 
   const handleAddImage = () => {
@@ -311,6 +321,7 @@ export default function CreateTemplate({
         name: templateName,
         nickname: templateNickname,
         description,
+        type: templateType.split(',').map((str) => str.trim()),
         images: imageList,
         portVals,
         envVals,
@@ -339,22 +350,32 @@ export default function CreateTemplate({
       <Title>템플릿 생성</Title>
       <InputWithLabel
         name="템플릿 이름"
+        id="템플릿 이름"
         value={templateName}
         setValue={setTemplateName}
       />
       <InputWithLabel
         name="판매자에게 보여줄 템플릿 이름"
+        id="판매자에게 보여줄 템플릿 이름"
         value={templateNickname}
         setValue={setTemplateNickname}
       />
       <InputWithLabel
         name="판매자에게 보여줄 템플릿 설명"
+        id="판매자에게 보여줄 템플릿 설명"
         value={description}
         setValue={setDescription}
+      />
+      <InputWithLabel
+        name="템플릿 타입 (noseat, merchandise 처럼 쉼표로 구분)"
+        id="템플릿 타입"
+        value={templateType}
+        setValue={setTemplateType}
       />
       <div className={styles.title}>마이크로서비스 이미지 목록</div>
       <InputWithLabel
         name="직접 추가할 이미지 이름"
+        id="직접 추가할 이미지 이름"
         value={manualImageName}
         setValue={setManualImageName}
       />

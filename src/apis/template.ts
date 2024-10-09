@@ -5,6 +5,7 @@ interface CreateTemplateParams {
   name: string;
   nickname: string;
   description: string;
+  type: string[];
   images: string[];
   pathPrefix: string[];
   portVals: [number, string][][];
@@ -41,6 +42,7 @@ export async function createTemplate({
   name,
   nickname,
   description,
+  type,
   images,
   portVals,
   envVals,
@@ -52,6 +54,7 @@ export async function createTemplate({
     name,
     nickname,
     description,
+    type,
     images,
     port_vals: portVals,
     env_vals: envVals,
