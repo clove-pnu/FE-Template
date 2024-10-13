@@ -26,7 +26,11 @@ export default function InputWithLabel({
         id={id}
         value={value}
         onChange={(e) => {
-          if (regex && regex.test(e.target.value)) {
+          if (regex) {
+            if (regex.test(e.target.value)) {
+              setValue(e.target.value);
+            }
+          } else {
             setValue(e.target.value);
           }
         }}
