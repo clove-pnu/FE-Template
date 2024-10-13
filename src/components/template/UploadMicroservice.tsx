@@ -4,6 +4,7 @@ import InputWithLabel from '../common/InputWithLabel';
 import { fetchWithHandler } from '../../utils/fetchWithHandler';
 import { uploadImage } from '../../apis/template';
 import Title from '../common/Title';
+import { REGEX_ALPHA_UNDER_NUMBER_DASH } from '../../utils/regex';
 
 export default function UploadMicroservice() {
   const [gitUrl, setGitUrl] = useState('');
@@ -64,6 +65,7 @@ export default function UploadMicroservice() {
         id="이미지 이름"
         value={imageName}
         setValue={setImageName}
+        regex={REGEX_ALPHA_UNDER_NUMBER_DASH}
       />
       <div className={styles.specTitle}>명세</div>
       <div className={styles.specInputContainer}>
@@ -72,12 +74,14 @@ export default function UploadMicroservice() {
           id="명세 키"
           value={specKey}
           setValue={setSpecKey}
+          regex={REGEX_ALPHA_UNDER_NUMBER_DASH}
         />
         <InputWithLabel
           name="명세 값"
           id="명세 값"
           value={specValue}
           setValue={setSpecValue}
+          regex={REGEX_ALPHA_UNDER_NUMBER_DASH}
         />
         <button
           type="button"

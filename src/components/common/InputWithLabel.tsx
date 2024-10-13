@@ -5,6 +5,7 @@ interface InputWithLabelProps {
   id: string;
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  regex?: RegExp;
 }
 
 export default function InputWithLabel({
@@ -12,6 +13,7 @@ export default function InputWithLabel({
   id,
   value,
   setValue,
+  regex,
 }: InputWithLabelProps) {
   return (
     <label
@@ -23,7 +25,11 @@ export default function InputWithLabel({
         type="text"
         id={id}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => {
+          if (regex && regex.test(e.target.value)) {
+            setValue(e.target.value);
+          }
+        }}
       />
     </label>
   );

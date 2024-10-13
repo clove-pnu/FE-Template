@@ -4,6 +4,7 @@ import Title from '../common/Title';
 import styles from '../styles/CreateTemplate.module.css';
 import { fetchWithHandler } from '../../utils/fetchWithHandler';
 import { createTemplate } from '../../apis/template';
+import { REGEX_ALPHA_SPACE_NUMBER, REGEX_ALPHA_UNDER_NUMBER_DASH, REGEX_ALPHA_UNDER_SPACE_COMMA } from '../../utils/regex';
 
 interface CreateTemplateProps {
   imageList: string[];
@@ -353,24 +354,28 @@ export default function CreateTemplate({
         id="템플릿 이름"
         value={templateName}
         setValue={setTemplateName}
+        regex={REGEX_ALPHA_UNDER_NUMBER_DASH}
       />
       <InputWithLabel
         name="판매자에게 보여줄 템플릿 이름"
         id="판매자에게 보여줄 템플릿 이름"
         value={templateNickname}
         setValue={setTemplateNickname}
+        regex={REGEX_ALPHA_SPACE_NUMBER}
       />
       <InputWithLabel
         name="판매자에게 보여줄 템플릿 설명"
         id="판매자에게 보여줄 템플릿 설명"
         value={description}
         setValue={setDescription}
+        regex={REGEX_ALPHA_SPACE_NUMBER}
       />
       <InputWithLabel
-        name="템플릿 타입 (noseat, merchandise 처럼 쉼표로 구분)"
+        name="템플릿 타입 (여러 개인 경우 쉼표로 구분)"
         id="템플릿 타입"
         value={templateType}
         setValue={setTemplateType}
+        regex={REGEX_ALPHA_UNDER_SPACE_COMMA}
       />
       <div className={styles.title}>마이크로서비스 이미지 목록</div>
       <InputWithLabel
